@@ -1,6 +1,5 @@
 /.bsp/
 target/
-.bloop
-.bloop
-.metals
-
+.bloop/
+.metals/
+.ammonite/

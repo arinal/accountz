@@ -11,7 +11,7 @@ package object config {
 
   final case class Config(http: HttpConfig, db: DBConfig)
 
-  val layer = {
+  val layer: ZLayer[Any, Nothing, Has[DBConfig] with Has[HttpConfig]] = {
     val rootConfig = ZLayer.fromEffect {
       ZIO
         .fromEither(ConfigSource.default.load[Config])

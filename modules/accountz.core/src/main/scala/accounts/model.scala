@@ -45,7 +45,7 @@ object Account {
   ): ErrorOr[Account] =
     (
       validateAccountNo(no),
-      validateOpenCloseDate(openDate.getOrElse(today), closeDate)
+      validateOpenCloseDate(openDate.getOrElse(today()), closeDate)
     ).mapN { (n, d) =>
       CheckingAccount(n, name, d._1, d._2, balance)
     }.toEither
@@ -60,7 +60,7 @@ object Account {
   ): ErrorOr[Account] =
     (
       validateAccountNo(no),
-      validateOpenCloseDate(openDate.getOrElse(today), closeDate),
+      validateOpenCloseDate(openDate.getOrElse(today()), closeDate),
       validateRate(rate)
     ).mapN { (n, d, r) =>
       SavingsAccount(n, name, r, d._1, d._2, balance)

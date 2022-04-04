@@ -38,7 +38,7 @@ class AccountLive(repo: AccountRepository) extends AccountAlg {
   ): IO[AccountError, Account] =
     withError(repo.query(no)).flatMap {
       case Some(a) =>
-        createOrUpdate(Account.close(a, closeDate.getOrElse(today)))
+        createOrUpdate(Account.close(a, closeDate.getOrElse(today())))
       case None => IO.fail(NonExistingAccount(no))
     }
 

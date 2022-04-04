@@ -55,8 +55,9 @@ final class DoobieAccountRepository(xa: Transactor[Task])
 
 object DoobieAccountRepository {
 
-  def layer
-      : ZLayer[Blocking with Has[DBConfig], Throwable, Has[AccountRepository]] = {
+  def layer: ZLayer[Blocking with Has[DBConfig], Throwable, Has[
+    AccountRepository
+  ]] = {
     import zio.interop.catz.implicits._
 
     implicit val zioRuntime: zio.Runtime[zio.ZEnv] = zio.Runtime.default
@@ -72,7 +73,9 @@ object DoobieAccountRepository {
 
     def mkTransactor(
         cfg: DBConfig
-    ): ZManaged[Blocking with Has[DBConfig], Throwable, HikariTransactor[Task]] =
+    ): ZManaged[Blocking with Has[DBConfig], Throwable, HikariTransactor[
+      Task
+    ]] =
       for {
         rt <- ZIO.runtime[Any].toManaged_
         xa <-
@@ -101,7 +104,7 @@ object DoobieAccountRepository {
       sql"""
         merge into accounts key (no)
         values (${account.no}, ${account.name}, null, ${account.dateOfOpen
-        .getOrElse(today)}, ${account.dateOfClose}, ${account.balance.amount})
+        .getOrElse(today())}, ${account.dateOfClose}, ${account.balance.amount})
       """.update
     }
 

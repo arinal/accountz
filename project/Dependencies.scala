@@ -41,21 +41,10 @@ object Dependencies {
     val postgres = "org.tpolecat" %% "doobie-postgres" % Version.doobie
   }
 
-  val dependencies: Seq[ModuleID] = Seq(
-    Cats.cats,
-    Zio.zio,
-    // Zio.zioLogging,
-    // Zio.zioLoggingSlf4j,
-    // Zio.log4jAPI,
-    // Zio.log4jCore,
-    // Zio.log4jSlf4jImpl,
-    Zio.interopCats,
-    Doobie.core,
-    Doobie.h2,
-    Doobie.hikari,
-    Doobie.postgres,
-    Http4s.blazeServer,
-    Http4s.dsl,
-    pureconfig,
-  )
+  object layer {
+    val core   = Seq(Cats.cats, Zio.zio, Zio.interopCats)
+    val doobie = Seq(Doobie.core, Doobie.h2, Doobie.hikari, Doobie.postgres)
+    val rest   = Seq(Http4s.blazeServer, Http4s.dsl)
+    val boot   = Seq(pureconfig)
+  }
 }

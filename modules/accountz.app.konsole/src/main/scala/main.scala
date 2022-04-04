@@ -12,9 +12,9 @@ import zio.blocking.Blocking
 object Main {
 
   import core.accounts.AccountAlg
-  import AccountAlg._
 
   def run: URIO[Has[AccountAlg] with Console, ExitCode] = {
+    import AccountAlg._
     val opens =
       for {
         _ <- open("a1234", "a1name", None, None, Checking)

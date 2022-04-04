@@ -13,6 +13,8 @@ import org.http4s._
 import org.http4s.dsl.Http4sDsl
 import org.http4s.server.blaze.BlazeServerBuilder
 
+case class HttpConfig(host: String, port: Int)
+
 object Main {
 
   val dsl = Http4sDsl[Task]
@@ -56,5 +58,3 @@ object Main {
     _ => ZIO.succeed(ExitCode.success)
   )
 }
-
-case class HttpConfig(host: String, port: Int)

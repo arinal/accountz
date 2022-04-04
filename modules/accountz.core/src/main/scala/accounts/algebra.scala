@@ -1,8 +1,8 @@
 package io.lamedh.accountz.core.accounts
 
-import io.lamedh.accountz.core._
 import io.lamedh.common._
 import zio._
+
 import java.util.Date
 
 sealed trait AccountType

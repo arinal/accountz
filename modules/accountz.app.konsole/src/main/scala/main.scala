@@ -1,7 +1,8 @@
-package io.lamedh.accountz.app.konsole
+package io.lamedh.accountz
+package app.konsole
 
-import io.lamedh.accountz.core.accounts.Checking
-import io.lamedh.accountz.core.accounts.Savings
+import core.accounts.Checking
+import core.accounts.Savings
 import io.lamedh.common._
 
 import zio._
@@ -10,7 +11,7 @@ import zio.blocking.Blocking
 
 object Main {
 
-  import io.lamedh.accountz.core.accounts.AccountAlg
+  import core.accounts.AccountAlg
   import AccountAlg._
 
   def run: URIO[Has[AccountAlg] with Console, ExitCode] = {

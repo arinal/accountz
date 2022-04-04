@@ -1,8 +1,9 @@
-package io.lamedh.accountz.app.rest
+package io.lamedh.accountz
+package app.rest
 
-import io.lamedh.accountz.core.accounts.AccountAlg
-import io.lamedh.accountz.core.accounts.Checking
-import io.lamedh.accountz.core.accounts.Savings
+import core.accounts.AccountAlg
+import core.accounts.Checking
+import core.accounts.Savings
 
 import zio._
 import zio.console._

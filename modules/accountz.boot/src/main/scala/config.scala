@@ -1,8 +1,10 @@
-package io.lamedh.accountz.boot
+package io.lamedh.accountz
+package boot
 
-import io.lamedh.accountz.app.konsole
-import io.lamedh.accountz.app.rest.HttpConfig
-import io.lamedh.accountz.infra.repo.doobie.DBConfig
+import app.konsole
+import app.rest.HttpConfig
+import infra.repo.doobie.DBConfig
+
 import pureconfig.{ConfigConvert, ConfigSource}
 import pureconfig.generic.auto._
 import zio._

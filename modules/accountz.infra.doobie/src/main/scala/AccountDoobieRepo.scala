@@ -1,6 +1,7 @@
-package io.lamedh.accountz.infra.repo.doobie
+package io.lamedh.accountz
+package infra.repo.doobie
 
-import io.lamedh.accountz.core.accounts._
+import core.accounts._
 import io.lamedh.common._
 
 import doobie._

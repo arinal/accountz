@@ -4,6 +4,7 @@ import io.lamedh.common._
 import cats._
 import cats.data._
 import cats.syntax.all._
+
 import java.util.{Date, Calendar}
 
 case class Balance(amount: Amount = 0)

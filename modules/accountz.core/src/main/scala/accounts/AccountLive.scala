@@ -6,6 +6,8 @@ import zio._
 
 import cats.data.NonEmptyChain
 import java.util.Date
+import io.lamedh.accountz.core.users.UserAlg
+import java.util.UUID
 
 object AccountLive {
   val layer: ZLayer[Has[AccountRepository], Nothing, Has[AccountAlg]] =
@@ -21,16 +23,32 @@ class AccountLive(repo: AccountRepository) extends AccountAlg {
       openingDate: Option[Date],
       accountType: AccountType
   ): IO[AccountError, Account] =
-    withError(repo.query(no)).flatMap(maybeAccount =>
-      doOpenAccount(
-        maybeAccount,
+    for {
+      maybeAcc <- withError(repo.query(no))
+      acc <- doOpenAccount(maybeAcc, no, name, rate, openingDate, accountType)
+    } yield acc
+
+  def open(
+      no: String,
+      userId: UUID,
+      rate: Option[BigDecimal],
+      openingDate: Option[Date],
+      accountType: AccountType
+  ): ZIO[Has[UserAlg], AccountError, Account] =
+    for {
+      user <- UserAlg
+        .get(userId)
+        .mapError(e => EtcError(NonEmptyChain.of(e.message)))
+      maybeAcc <- withError(repo.query(no))
+      acc <- doOpenAccount(
+        maybeAcc,
         no,
-        name,
+        user.username,
         rate,
         openingDate,
         accountType
       )
-    )
+    } yield acc
 
   def close(
       no: String,

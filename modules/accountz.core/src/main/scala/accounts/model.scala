@@ -6,15 +6,17 @@ import cats.data._
 import cats.syntax.all._
 
 import java.util.{Date, Calendar}
+import java.util.UUID
 
 case class Balance(amount: Amount = 0)
+case class User(id: UUID, name: String)
 
 sealed trait Account {
   def no: String
   def name: String
+  def balance: Balance
   def dateOfOpen: Option[Date]
   def dateOfClose: Option[Date]
-  def balance: Balance
 }
 
 final case class CheckingAccount(

@@ -1,9 +1,12 @@
-package io.lamedh.accountz.core.accounts
+package io.lamedh.accountz
+package core.accounts
 
 import io.lamedh.common._
+import core.users.UserAlg
 import zio._
 
 import java.util.Date
+import java.util.UUID
 
 sealed trait AccountType
 case object Checking extends AccountType
@@ -18,6 +21,14 @@ trait AccountAlg {
       openingDate: Option[Date],
       accountType: AccountType
   ): IO[AccountError, Account]
+
+  def open(
+      no: String,
+      userId: UUID,
+      rate: Option[BigDecimal],
+      openingDate: Option[Date],
+      accountType: AccountType
+  ): ZIO[Has[UserAlg], AccountError, Account]
 
   def close(
       no: String,

@@ -1,12 +1,13 @@
-package io.lamedh.accountz.core.accounts
+package io.lamedh.accountz
+package core.accounts
 
+import core.users.UserAlg
 import io.lamedh.common._
 
 import zio._
 
 import cats.data.NonEmptyChain
 import java.util.Date
-import io.lamedh.accountz.core.users.UserAlg
 import java.util.UUID
 
 object AccountLive {

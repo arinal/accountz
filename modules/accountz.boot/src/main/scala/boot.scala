@@ -7,6 +7,7 @@ import app.rest.HttpConfig
 import infra.repo.doobie.DBConfig
 import infra.repo.inmemory.InMemoryAccountRepository
 import infra.repo.doobie.DoobieAccountRepository
+import infra.userclient.UserHttpClient
 import core.accounts.AccountLive
 import core.accounts.AccountRepository
 
@@ -20,6 +21,7 @@ object Boot extends App {
       config.layer >+>
       InMemoryAccountRepository.layer >+>
       // DoobieAccountRepository.layer.orDie >+>
+      UserHttpClient.layer >+>
       AccountLive.layer
 
   override def run(args: List[String]) = {

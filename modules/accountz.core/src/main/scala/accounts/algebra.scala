@@ -1,8 +1,8 @@
 package io.lamedh.accountz
 package core.accounts
 
-import io.lamedh.common._
 import core.users.UserAlg
+import io.lamedh.common._
 import zio._
 
 import java.util.Date
@@ -58,6 +58,19 @@ object AccountAlg {
       accountType: AccountType
   ): ZIO[Has[AccountAlg], AccountError, Account] =
     ZIO.serviceWith(_.open(no, name, rate, openingDate, accountType))
+
+  def open(
+      no: String,
+      userId: UUID,
+      rate: Option[BigDecimal],
+      openingDate: Option[Date],
+      accountType: AccountType
+  ): ZIO[Has[UserAlg] with Has[AccountAlg], AccountError, Account] =
+    for {
+      acc <- ZIO.accessM[Has[AccountAlg] with Has[UserAlg]](
+        _.get.open(no, userId, rate, openingDate, accountType)
+      )
+    } yield acc
 
   def close(
       no: String,

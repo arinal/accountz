@@ -29,6 +29,11 @@ lazy val infraRepoMemory = (project in file("modules/accountz.infra.inmemory"))
   .settings(name := "accountz-infra-memory")
   .dependsOn(core)
 
+lazy val infraUserClient =
+  (project in file("modules/accountz.infra.userclient"))
+    .settings(name := "accountz-infra-userclient")
+    .dependsOn(core)
+
 lazy val appRest = (project in file("modules/accountz.app.rest"))
   .settings(
     name := "accountz-app-rest",
@@ -45,4 +50,11 @@ lazy val boot = (project in file("modules/accountz.boot"))
     name := "accountz-boot",
     libraryDependencies ++= layer.boot
   )
-  .dependsOn(core, infraRepoDoobie, infraRepoMemory, appRest, appKonsole)
+  .dependsOn(
+    core,
+    infraRepoDoobie,
+    infraRepoMemory,
+    infraUserClient,
+    appRest,
+    appKonsole
+  )
